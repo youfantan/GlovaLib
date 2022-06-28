@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.22)
+project(WindowsConsoleAnsiSupport)
+
+set(CMAKE_CXX_STANDARD 14)
+include_directories(includes)
+add_library(WindowsConsoleAnsiSupport SHARED glous_blockstudio_wcas_WindowsConsoleAnsiSupport.cc)
