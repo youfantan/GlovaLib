@@ -1,9 +1,9 @@
-package glous.blockstudio.tests;
+package glovalib.tests;
 
-import glous.blockstudio.core.features.Logger;
-import glous.blockstudio.core.features.async.AsyncFunctionQueue;
-import glous.blockstudio.events.EventApplicationStart;
-import glous.blockstudio.events.EventApplicationStop;
+import glovalib.core.features.Logger;
+import glovalib.core.features.async.AsyncFunctionQueue;
+import glovalib.events.EventApplicationStart;
+import glovalib.events.EventApplicationStop;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.InvocationTargetException;
@@ -12,7 +12,7 @@ import java.lang.reflect.Method;
 public class AsyncTests {
     @Test
     public void testAsyncFunctionQueue0() throws InterruptedException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        Class<?> sysout=Class.forName("glous.blockstudio.core.features.Logger");
+        Class<?> sysout=Class.forName("glovalib.core.features.Logger");
         Method initialize=sysout.getDeclaredMethod("initialize", EventApplicationStart.class);
         initialize.setAccessible(true);
         initialize.invoke(null,new EventApplicationStart());
@@ -36,7 +36,7 @@ public class AsyncTests {
     }
     @Test
     public void testAsyncFunctionQueue1() throws InterruptedException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        Class<?> sysout=Class.forName("glous.blockstudio.core.features.Logger");
+        Class<?> sysout=Class.forName("glovalib.core.features.Logger");
         Method initialize=sysout.getDeclaredMethod("initialize", EventApplicationStart.class);
         initialize.setAccessible(true);
         initialize.invoke(null,new EventApplicationStart());

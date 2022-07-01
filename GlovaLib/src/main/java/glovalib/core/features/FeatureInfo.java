@@ -1,4 +1,4 @@
-package glous.blockstudio.core.features;
+package glovalib.core.features;
 
 import java.lang.annotation.*;
 

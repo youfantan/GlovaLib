@@ -1,4 +1,4 @@
-package glous.blockstudio.core.features.async;
+package glovalib.core.features.async;
 
 import java.util.LinkedList;
 

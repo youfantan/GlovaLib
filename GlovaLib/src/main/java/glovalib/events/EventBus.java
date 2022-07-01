@@ -1,4 +1,4 @@
-package glous.blockstudio.events;
+package glovalib.events;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,7 +13,7 @@ public class EventBus {
     private static Hashtable<Class<? extends Event>, List<Method>> EventHandlers=new Hashtable<>();
     public static void Start() throws IOException {
         //juage if in complete jar mode or in debug environment
-        URL url=Thread.currentThread().getContextClassLoader().getResource("glous");
+        URL url=Thread.currentThread().getContextClassLoader().getResource("glovalib");
         assert url != null;
         if (url.getProtocol().equals("jar")){
             //complete jar

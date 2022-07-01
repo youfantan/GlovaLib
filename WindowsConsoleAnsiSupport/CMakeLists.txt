@@ -3,4 +3,4 @@ project(WindowsConsoleAnsiSupport)
 
 set(CMAKE_CXX_STANDARD 14)
 include_directories(includes)
-add_library(WindowsConsoleAnsiSupport SHARED glous_blockstudio_wcas_WindowsConsoleAnsiSupport.cc)
+add_library(WindowsConsoleAnsiSupport SHARED glovalib_wcas_WindowsConsoleAnsiSupport.cc)

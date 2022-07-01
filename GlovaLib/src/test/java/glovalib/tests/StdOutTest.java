@@ -1,11 +1,13 @@
-package glous.blockstudio.tests;
+package glovalib.tests;
 
-import glous.blockstudio.core.features.Logger;
-import glous.blockstudio.core.features.SysOut;
-import glous.blockstudio.events.EventApplicationStart;
-import glous.blockstudio.events.EventApplicationStop;
+import glovalib.core.features.Logger;
+import glovalib.core.features.SysOut;
+import glovalib.events.EventApplicationStart;
+import glovalib.events.EventApplicationStop;
+import glovalib.wcas.WindowsConsoleAnsiSupport;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Random;
@@ -14,7 +16,7 @@ public class StdOutTest {
     @Test
     public void testSysOut() throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         //initialize SysOut by reflection
-        Class<?> sysout=Class.forName("glous.blockstudio.core.features.SysOut");
+        Class<?> sysout=Class.forName("glovalib.core.features.SysOut");
         Method initialize=sysout.getDeclaredMethod("initialize", EventApplicationStart.class);
         initialize.setAccessible(true);
         initialize.invoke(null,new EventApplicationStart());
@@ -35,7 +37,7 @@ public class StdOutTest {
     }
     @Test
     public void testLogger() throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        Class<?> sysout=Class.forName("glous.blockstudio.core.features.Logger");
+        Class<?> sysout=Class.forName("glovalib.core.features.Logger");
         Method initialize=sysout.getDeclaredMethod("initialize", EventApplicationStart.class);
         initialize.setAccessible(true);
         initialize.invoke(null,new EventApplicationStart());

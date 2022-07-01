@@ -1,4 +1,4 @@
-package glous.blockstudio.events;
+package glovalib.events;
 
 public class EventApplicationStop extends Event{
 }

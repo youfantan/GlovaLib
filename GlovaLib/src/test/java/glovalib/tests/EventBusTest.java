@@ -1,9 +1,9 @@
-package glous.blockstudio.tests;
+package glovalib.tests;
 
-import glous.blockstudio.events.EventApplicationStart;
-import glous.blockstudio.events.EventApplicationStop;
-import glous.blockstudio.events.EventBus;
-import glous.blockstudio.events.SubscribeEvent;
+import glovalib.events.EventApplicationStart;
+import glovalib.events.EventApplicationStop;
+import glovalib.events.EventBus;
+import glovalib.events.SubscribeEvent;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;

@@ -1,8 +1,8 @@
-package glous.blockstudio.core.features;
+package glovalib.core.features;
 
-import glous.blockstudio.events.EventApplicationStart;
-import glous.blockstudio.events.EventApplicationStop;
-import glous.blockstudio.events.SubscribeEvent;
+import glovalib.events.EventApplicationStart;
+import glovalib.events.EventApplicationStop;
+import glovalib.events.SubscribeEvent;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
