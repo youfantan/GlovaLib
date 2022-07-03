@@ -16,7 +16,7 @@ public class Logger {
     private static File logFile;
     private static final ByteArrayOutputStream writerStream=new ByteArrayOutputStream();
     @SubscribeEvent(event = EventApplicationStart.class)
-    private static void initialize(EventApplicationStart evt) throws IOException {
+    public static void initialize(EventApplicationStart evt) throws IOException {
         File logDir=new File("logs");
         if (!logDir.exists()){
             logDir.mkdir();
@@ -28,7 +28,7 @@ public class Logger {
         fileOut =new FileOutputStream(logFile);
     }
     @SubscribeEvent(event = EventApplicationStop.class)
-    private static void stop(EventApplicationStop evt){
+    public static void stop(EventApplicationStop evt){
         try {
             fileOut.flush();
             fileOut.close();

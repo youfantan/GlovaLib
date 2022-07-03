@@ -9,7 +9,7 @@ import java.util.Locale;
 
 public class SysOut {
     @SubscribeEvent(event = EventApplicationStart.class)
-    private static void initialize(EventApplicationStart evt){
+    public static void initialize(EventApplicationStart evt){
         if (System.getProperty("os.name").toLowerCase(Locale.ROOT).contains("windows")){
             //load ansi support
             System.load(new File("bin\\WindowsConsoleAnsiSupport.dll").getAbsolutePath());
