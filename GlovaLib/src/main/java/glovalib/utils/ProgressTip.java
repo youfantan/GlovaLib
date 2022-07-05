@@ -5,7 +5,6 @@ import glovalib.core.features.Logger;
 public class ProgressTip {
     private String tipString;
     private int tipDuring;
-    private final Logger logger=Logger.getLogger(ProgressTip.class,"Progress");
     private Object[] data;
     private boolean flag=true;
     public ProgressTip(String tipString,int tipDuring,Object[] initializeData){
@@ -17,12 +16,13 @@ public class ProgressTip {
         this.data=data;
     }
     public void stop(){
+        System.out.printf(tipString, data);
         this.flag=false;
     }
     public void start(){
         while (flag){
             try {
-                logger.info(tipString.formatted(data));
+                System.out.print(tipString.formatted(data)+"\r");
                 Thread.sleep(tipDuring);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);

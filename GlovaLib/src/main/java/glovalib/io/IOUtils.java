@@ -1,6 +1,7 @@
 package glovalib.io;
 
 import javax.net.ssl.HttpsURLConnection;
+import java.awt.desktop.PreferencesEvent;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -10,7 +11,7 @@ import java.util.zip.GZIPOutputStream;
 
 public class IOUtils {
     public interface stream_read_callback{
-        void read(byte[] data,int offset,int length);
+        void read(byte[] data,int offset,int length) throws IOException;
     }
     public static void readStream(InputStream stream,stream_read_callback callback) throws IOException {
         BufferedInputStream in=new BufferedInputStream(stream);
@@ -78,5 +79,35 @@ public class IOUtils {
         byte[] destination=getBytesFromStream(in);
         in.close();
         return destination;
+    }
+    public static void copyStream(InputStream in,OutputStream out) throws IOException {
+        IOUtils.readStream(in,(bytes,i,i1)->{
+            writeStream(out,bytes,i,i1);
+        });
+    }
+    public static void copyFile(File in,File out) throws IOException {
+        FileInputStream fin=new FileInputStream(in);
+        FileOutputStream fout=new FileOutputStream(out);
+        copyStream(fin,fout);
+        fin.close();
+        fout.close();
+    }
+    public static void writeFile(File destination,byte[] content) throws IOException {
+        FileOutputStream out=new FileOutputStream(destination);
+        writeStream(out,content);
+    }
+    public static void writeFile(File destination,String content) throws IOException {
+        writeFile(destination,content.getBytes(StandardCharsets.UTF_8));
+    }
+    public static byte[] readFile(File input) throws IOException {
+        FileInputStream in=new FileInputStream(input);
+        ByteArrayOutputStream out=new ByteArrayOutputStream();
+        IOUtils.readStream(in, out::write);
+        in.close();
+        out.close();
+        return out.toByteArray();
+    }
+    public static String readFileString(File input) throws IOException {
+        return new String(readFile(input));
     }
 }
