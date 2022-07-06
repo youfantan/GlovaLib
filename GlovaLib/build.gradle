@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'glous.lib'
-version 'Beta-0.4'
+version 'Beta-0.5'
 
 repositories {
     maven { url 'https://maven.aliyun.com/repository/public/' }
@@ -16,6 +16,7 @@ jar{
 }
 
 dependencies {
+    implementation 'org.jetbrains:annotations:20.1.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
 }

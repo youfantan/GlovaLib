@@ -95,6 +95,7 @@ public class IOUtils {
     public static void writeFile(File destination,byte[] content) throws IOException {
         FileOutputStream out=new FileOutputStream(destination);
         writeStream(out,content);
+        out.close();
     }
     public static void writeFile(File destination,String content) throws IOException {
         writeFile(destination,content.getBytes(StandardCharsets.UTF_8));

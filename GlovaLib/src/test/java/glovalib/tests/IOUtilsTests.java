@@ -14,6 +14,9 @@ public class IOUtilsTests {
         File out=new File("test_out");
         IOUtils.copyFile(in,out);
         String out_string=IOUtils.readFileString(out);
+
+        in.delete();
+        out.delete();
         assert out_string.equals("Test String");
     }
 }
