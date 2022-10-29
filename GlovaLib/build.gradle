@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'glous.lib'
-version 'Beta-0.6'
+version 'Beta-0.7'
 
 repositories {
     maven { url 'https://maven.aliyun.com/repository/public/' }

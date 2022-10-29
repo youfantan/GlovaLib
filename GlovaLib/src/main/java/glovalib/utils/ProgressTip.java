@@ -1,7 +1,5 @@
 package glovalib.utils;
 
-import glovalib.core.features.Logger;
-
 public class ProgressTip {
     private String tipString;
     private int tipDuring;

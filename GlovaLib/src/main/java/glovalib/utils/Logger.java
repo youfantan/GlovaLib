@@ -1,4 +1,4 @@
-package glovalib.core.features;
+package glovalib.utils;
 
 import glovalib.events.EventApplicationStart;
 import glovalib.events.EventApplicationStop;
@@ -61,29 +61,17 @@ public class Logger {
         FATAL
     }
     private String name;
-    private String type;
-    private static Hashtable<Class<? extends Feature>,Logger> instances=new Hashtable<>();
     private static Hashtable<Class<?>,Logger> customInstances=new Hashtable<>();
-    public static Logger getLogger(Class<? extends Feature> feature){
-        if (instances.containsKey(feature)){
-            return instances.get(feature);
-        }
-        String name=feature.getAnnotation(FeatureInfo.class).name();
-        Logger logger=new Logger(name,"Feature");
-        instances.put(feature,logger);
-        return logger;
-    }
-    public static Logger getLogger(Class<?> cls,String name){
+    public static Logger getLogger(Class<?> cls){
         if (customInstances.containsKey(cls)){
             return customInstances.get(cls);
         }
-        Logger logger=new Logger(name,"Custom");
+        Logger logger=new Logger(cls.getSimpleName());
         customInstances.put(cls,logger);
         return logger;
     }
-    private Logger(String name,String type){
+    private Logger(String name){
         this.name=name;
-        this.type=type;
     }
     private static String getTime(String pattern){
         Date date=new Date();
@@ -94,17 +82,17 @@ public class Logger {
         /*
         * Example Logger Format:
         * TIME [LEVEL/TYPE/NAME/THREAD] Message
-        * 2022-6-24-15:48:02 [INFO/Feature/Logger/LoggerThread] This is a logger message
+        * 2022-6-24-15:48:02 [INFO] [Logger:LoggerThread] This is a logger message
         * */
-        String format="%s [%s/%s/%s/%s] %s%n";
+        String format="%s [%s/%s/%s] %s%n";
         //print to console
         switch (level){
-            case WARN -> SysOut.Yellow((format=format.formatted(getTime("yyyy-MM-dd HH:mm:ss"),"WARN",type,name,Thread.currentThread().getName(),text)));
-            case DEBUG -> SysOut.Cyan((format=format.formatted(getTime("yyyy-MM-dd HH:mm:ss"),"DEBUG",type,name,Thread.currentThread().getName(),text)));
-            case ERROR -> SysOut.Red((format=format.formatted(getTime("yyyy-MM-dd HH:mm:ss"),"ERROR",type,name,Thread.currentThread().getName(),text)));
-            case FATAL -> SysOut.Red((format=format.formatted(getTime("yyyy-MM-dd HH:mm:ss"),"FATAL",type,name,Thread.currentThread().getName(),text)));
-            case TRACE -> SysOut.Bit256(243,(format=format.formatted(getTime("yyyy-MM-dd HH:mm:ss"),"TRACE",type,name,Thread.currentThread().getName(),text)));
-            case INFO -> SysOut.White((format=format.formatted(getTime("yyyy-MM-dd HH:mm:ss"),"INFO",type,name,Thread.currentThread().getName(),text)));
+            case WARN -> SysOut.Yellow((format=format.formatted(getTime("yyyy-MM-dd HH:mm:ss"),"WARN",name,Thread.currentThread().getName(),text)));
+            case DEBUG -> SysOut.Cyan((format=format.formatted(getTime("yyyy-MM-dd HH:mm:ss"),"DEBUG",name,Thread.currentThread().getName(),text)));
+            case ERROR -> SysOut.Red((format=format.formatted(getTime("yyyy-MM-dd HH:mm:ss"),"ERROR",name,Thread.currentThread().getName(),text)));
+            case FATAL -> SysOut.Red((format=format.formatted(getTime("yyyy-MM-dd HH:mm:ss"),"FATAL",name,Thread.currentThread().getName(),text)));
+            case TRACE -> SysOut.Bit256(243,(format=format.formatted(getTime("yyyy-MM-dd HH:mm:ss"),"TRACE",name,Thread.currentThread().getName(),text)));
+            case INFO -> SysOut.White((format=format.formatted(getTime("yyyy-MM-dd HH:mm:ss"),"INFO",name,Thread.currentThread().getName(),text)));
         }
         try {
             fileOut.write(format.getBytes(StandardCharsets.UTF_8));
@@ -129,37 +117,5 @@ public class Logger {
     }
     public void fatal(String text){
         message(text,LogLevel.FATAL);
-    }
-    public static class LogWriter extends Writer{
-
-        @Override
-        public void write(char[] cbuf, int off, int len) throws IOException {
-            Logger logger=Logger.getLogger(LogWriter.class,"LogWriter");
-            String msgBuf=new String(cbuf);
-            logger.message(msgBuf,LogLevel.DEBUG);
-            writerStream.write(CharArrayToByteArray(cbuf),off,len);
-        }
-
-        @Override
-        public void flush() throws IOException {
-            writerStream.flush();
-        }
-
-        @Override
-        public void close() throws IOException {
-            writerStream.close();
-        }
-    }
-    private static final LogWriter writerInstance=new LogWriter();
-    private static byte[] CharArrayToByteArray(char[] arr){
-        byte[] arr0=new byte[arr.length];
-        for (int i = 0; i < arr.length; i++) {
-            arr0[i]=(byte) arr[i];
-        }
-        return arr0;
-    }
-
-    public static LogWriter getWriterInstance() {
-        return writerInstance;
     }
 }

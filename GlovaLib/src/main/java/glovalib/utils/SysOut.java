@@ -1,4 +1,4 @@
-package glovalib.core.features;
+package glovalib.utils;
 
 import glovalib.events.EventApplicationStart;
 import glovalib.events.SubscribeEvent;

@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 3.22)
+cmake_minimum_required(VERSION 3.20)
 project(WindowsConsoleAnsiSupport)
-
 set(CMAKE_CXX_STANDARD 14)
+add_compile_options(/MT)
 include_directories(includes)
 add_library(WindowsConsoleAnsiSupport SHARED glovalib_wcas_WindowsConsoleAnsiSupport.cc)

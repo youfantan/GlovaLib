@@ -1,7 +1,10 @@
 WindowsConsoleAnsiSupport/cmake-build-debug/
 WindowsConsoleAnsiSupport/cmake-build-release/
 WindowsConsoleAnsiSupport/.idea/
-GlovaLib/.idea
-GlovaLib/.gradle
-GlovaLib/build
-GlovaLib/bin
+WindowsConsoleAnsiSupport/.vs/
+WindowsConsoleAnsiSupport/CMakeSettings.json
+WindowsConsoleAnsiSupport/out/
+GlovaLib/.idea/
+GlovaLib/.gradle/
+GlovaLib/build/
+GlovaLib/bin/

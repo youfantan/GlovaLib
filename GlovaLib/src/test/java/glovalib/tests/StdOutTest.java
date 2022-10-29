@@ -1,13 +1,11 @@
 package glovalib.tests;
 
-import glovalib.core.features.Logger;
-import glovalib.core.features.SysOut;
+import glovalib.utils.Logger;
+import glovalib.utils.SysOut;
 import glovalib.events.EventApplicationStart;
 import glovalib.events.EventApplicationStop;
-import glovalib.wcas.WindowsConsoleAnsiSupport;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Random;
@@ -16,7 +14,7 @@ public class StdOutTest {
     @Test
     public void testSysOut() throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         //initialize SysOut by reflection
-        Class<?> sysout=Class.forName("glovalib.core.features.SysOut");
+        Class<?> sysout=Class.forName("glovalib.utils.SysOut");
         Method initialize=sysout.getDeclaredMethod("initialize", EventApplicationStart.class);
         initialize.setAccessible(true);
         initialize.invoke(null,new EventApplicationStart());
@@ -37,11 +35,11 @@ public class StdOutTest {
     }
     @Test
     public void testLogger() throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        Class<?> sysout=Class.forName("glovalib.core.features.Logger");
+        Class<?> sysout=Class.forName("glovalib.utils.Logger");
         Method initialize=sysout.getDeclaredMethod("initialize", EventApplicationStart.class);
         initialize.setAccessible(true);
         initialize.invoke(null,new EventApplicationStart());
-        Logger logger=Logger.getLogger(StdOutTest.class,"Test");
+        Logger logger=Logger.getLogger(StdOutTest.class);
         logger.info("This is a INFO message");
         logger.debug("This is a DEBUG message");
         logger.trace("This is a TRACE message");
