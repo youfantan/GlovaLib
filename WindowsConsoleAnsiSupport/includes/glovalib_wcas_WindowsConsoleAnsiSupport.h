@@ -10,9 +10,9 @@ extern "C" {
 /*
  * Class:     glovalib_wcas_WindowsConsoleAnsiSupport
  * Method:    TryStart
- * Signature: ()Z
+ * Signature: ()I
  */
-JNIEXPORT jboolean JNICALL Java_glovalib_wcas_WindowsConsoleAnsiSupport_TryStart
+JNIEXPORT jint JNICALL Java_glovalib_wcas_WindowsConsoleAnsiSupport_TryStart
   (JNIEnv *, jclass);
 
 #ifdef __cplusplus

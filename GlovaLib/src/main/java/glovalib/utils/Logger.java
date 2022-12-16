@@ -1,9 +1,5 @@
 package glovalib.utils;
 
-import glovalib.events.EventApplicationStart;
-import glovalib.events.EventApplicationStop;
-import glovalib.events.SubscribeEvent;
-
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
@@ -15,8 +11,7 @@ public class Logger {
     private static FileOutputStream fileOut;
     private static File logFile;
     private static final ByteArrayOutputStream writerStream=new ByteArrayOutputStream();
-    @SubscribeEvent(event = EventApplicationStart.class)
-    public static void initialize(EventApplicationStart evt) throws IOException {
+    public static void initialize() throws IOException {
         File logDir=new File("logs");
         if (!logDir.exists()){
             logDir.mkdir();
@@ -27,8 +22,7 @@ public class Logger {
         Logger.logFile=logFile;
         fileOut =new FileOutputStream(logFile);
     }
-    @SubscribeEvent(event = EventApplicationStop.class)
-    public static void stop(EventApplicationStop evt){
+    public static void stop(){
         try {
             fileOut.flush();
             fileOut.close();
@@ -87,12 +81,12 @@ public class Logger {
         String format="%s [%s/%s/%s] %s%n";
         //print to console
         switch (level){
-            case WARN -> SysOut.Yellow((format=format.formatted(getTime("yyyy-MM-dd HH:mm:ss"),"WARN",name,Thread.currentThread().getName(),text)));
-            case DEBUG -> SysOut.Cyan((format=format.formatted(getTime("yyyy-MM-dd HH:mm:ss"),"DEBUG",name,Thread.currentThread().getName(),text)));
-            case ERROR -> SysOut.Red((format=format.formatted(getTime("yyyy-MM-dd HH:mm:ss"),"ERROR",name,Thread.currentThread().getName(),text)));
-            case FATAL -> SysOut.Red((format=format.formatted(getTime("yyyy-MM-dd HH:mm:ss"),"FATAL",name,Thread.currentThread().getName(),text)));
-            case TRACE -> SysOut.Bit256(243,(format=format.formatted(getTime("yyyy-MM-dd HH:mm:ss"),"TRACE",name,Thread.currentThread().getName(),text)));
-            case INFO -> SysOut.White((format=format.formatted(getTime("yyyy-MM-dd HH:mm:ss"),"INFO",name,Thread.currentThread().getName(),text)));
+            case WARN -> Console.Yellow((format=format.formatted(getTime("yyyy-MM-dd HH:mm:ss"),"WARN",name,Thread.currentThread().getName(),text)));
+            case DEBUG -> Console.Cyan((format=format.formatted(getTime("yyyy-MM-dd HH:mm:ss"),"DEBUG",name,Thread.currentThread().getName(),text)));
+            case ERROR -> Console.Red((format=format.formatted(getTime("yyyy-MM-dd HH:mm:ss"),"ERROR",name,Thread.currentThread().getName(),text)));
+            case FATAL -> Console.Red((format=format.formatted(getTime("yyyy-MM-dd HH:mm:ss"),"FATAL",name,Thread.currentThread().getName(),text)));
+            case TRACE -> Console.Bit256(243,(format=format.formatted(getTime("yyyy-MM-dd HH:mm:ss"),"TRACE",name,Thread.currentThread().getName(),text)));
+            case INFO -> Console.White((format=format.formatted(getTime("yyyy-MM-dd HH:mm:ss"),"INFO",name,Thread.currentThread().getName(),text)));
         }
         try {
             fileOut.write(format.getBytes(StandardCharsets.UTF_8));

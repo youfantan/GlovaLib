@@ -1,10 +1,9 @@
 package glovalib.io;
 
 import javax.net.ssl.HttpsURLConnection;
-import java.awt.desktop.PreferencesEvent;
 import java.io.*;
-import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
@@ -53,10 +52,9 @@ public class IOUtils {
     }
     public static byte[] getBytesFromUrl(String _url) throws IOException {
         URL url=new URL(_url);
-        HttpURLConnection connection= (HttpURLConnection) url.openConnection();
+        URLConnection connection= url.openConnection();
         byte[] bytes=getBytesFromStream(connection.getInputStream());
         connection.getInputStream().close();
-        connection.disconnect();
         return bytes;
     }
     public static String getStringFromUrlSafely(String _url) throws IOException {

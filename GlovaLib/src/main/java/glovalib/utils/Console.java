@@ -1,20 +1,19 @@
 package glovalib.utils;
 
-import glovalib.events.EventApplicationStart;
 import glovalib.events.SubscribeEvent;
 import glovalib.wcas.WindowsConsoleAnsiSupport;
 
 import java.io.File;
 import java.util.Locale;
 
-public class SysOut {
-    @SubscribeEvent(event = EventApplicationStart.class)
-    public static void initialize(EventApplicationStart evt){
+public class Console {
+    public static void initialize(){
         if (System.getProperty("os.name").toLowerCase(Locale.ROOT).contains("windows")){
             //load ansi support
             System.load(new File("bin\\WindowsConsoleAnsiSupport.dll").getAbsolutePath());
-            if (!WindowsConsoleAnsiSupport.TryStart()){
-                UniversalOutputLine("Cannot load Windows Virtual ANSI support.Please make sure your OS Version is Windows 10(update 1809) or higher,otherwise console log may output abnormally.");
+            int errcode;
+            if ((errcode=WindowsConsoleAnsiSupport.TryStart())!=0){
+                UniversalOutputLine("Cannot enable Virtual ANSI.Error code: %d".formatted(errcode));
             }
         }
     }
